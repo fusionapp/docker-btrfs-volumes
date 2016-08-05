@@ -1,0 +1,33 @@
+sudo: false
+branches:
+  only:
+  - master
+language: c
+cache:
+  directories:
+  - "$HOME/.cabal"
+  - "$HOME/.ghc"
+  - "$HOME/.stack"
+addons:
+  apt:
+    packages:
+    - libgmp-dev
+before_install:
+- mkdir -p $HOME/.local/bin
+- export PATH=$HOME/.local/bin:$PATH
+- travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards
+  --strip-components=1 -C $HOME/.local/bin '*/stack'
+- |
+  set -e
+  mkdir -p $HOME/.cabal
+  echo 'remote-repo: hackage.haskell.org:http://hackage.fpcomplete.com/' > $HOME/.cabal/config
+  echo 'remote-repo-cache: $HOME/.cabal/packages' >> $HOME/.cabal/config
+- stack setup
+install:
+- stack build --test --no-run-tests
+script:
+- stack --no-terminal test
+notifications:
+  email: false
+  slack:
+    secure: Z4mP6oV7lDgc3+0643dMI+07y1vWVJFsibdPCus+C4P7LVJglFGwR/0lumobXG8irprqDcou+DPzrM0JgE+eK0kfcsc0C/LtS6YZ8ZbSF5E/bIlSOKnHT2ZCAsxgEAZzKVArQuO76Mi3JQWEainzx2/B4taWv6bQp4zgm3Ny6cP0avPDzoHNxYaGX3N3RwaUULnAJLBIb05phtg3OPrSywD0L8HkYCpC91eKhXYOlrQcewtJjLp8+Zib7ccfp7/LRnQhHZGY/uoyH1XtcbVKVcO3lTo1ZweZe0XpyJEwBwKDWT981uh/VR3BxrZrvDV2w17QJ6BxqEXqN4KXCv+stpZUurx7PnOHOy1RX/PmYJZf78xJhkmErE5gycoeGU3VO3tus4ioOuebUl6Ab59xASJLVFPxDOdJyn+hJu7yopp5VEpgndHeu3omErH9dnn+Nnb8Ei7wEzp6QrzQw0dxtkSNBA/8MHuJSIyCURzU0iQQFyUhHVTTxmlyz7ezx4qGEOJEimFk+zR9amJd+qZGejKXA76Wvyc0ZN4y5s4rvRP3MZHIpthqP94zVXYj5/BVjmkBRT8oamT//bPBUiB5Oqtutz+ddqDMD5hBQi1ZRpQUbpCBOf/Iq+Tnym42oShQi2z3zzyVCvstFYv4m0P0H9kERipFDWw2ObwqnTbb5is=
