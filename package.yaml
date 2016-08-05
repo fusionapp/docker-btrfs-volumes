@@ -1,0 +1,38 @@
+name: docker-btrfs-volumes
+version: 0.1.0
+synopsis: Docker volume plugin for BTRFS subvolumes
+maintainer: Fusion Developers <dev@fusionapp.com>
+license: MIT
+github: fusionapp/docker-btrfs-volumes
+
+ghc-options: -Wall -fwarn-missing-signatures -fwarn-incomplete-patterns
+dependencies:
+  - base >= 4.7 && < 5
+  - aeson
+  - servant-server
+default-extensions:
+  - OverloadedStrings
+
+library:
+  source-dirs: src
+
+executables:
+  docker-btrfs-volumes:
+    main: Main.hs
+    source-dirs: app
+    dependencies:
+      - base
+      - docker-btrfs-volumes
+      - warp-tls
+
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs:
+      - test
+    dependencies:
+      - base
+      - docker-btrfs-volumes
+      - hspec
+      - hspec-wai
+      - http-types
