@@ -9,9 +9,22 @@ ghc-options: -Wall -fwarn-missing-signatures -fwarn-incomplete-patterns
 dependencies:
   - base >= 4.7 && < 5
   - aeson
+  - containers
+  - data-default
+  - directory
+  - filepath
+  - http-media
+  - lens
+  - servant
   - servant-server
+  - text
 default-extensions:
+  - DataKinds
+  - FlexibleInstances
+  - MultiParamTypeClasses
   - OverloadedStrings
+  - TemplateHaskell
+  - TypeOperators
 
 library:
   source-dirs: src
