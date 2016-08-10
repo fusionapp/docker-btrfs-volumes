@@ -8,21 +8,27 @@ github: fusionapp/docker-btrfs-volumes
 ghc-options: -Wall -fwarn-missing-signatures -fwarn-incomplete-patterns
 dependencies:
   - base >= 4.7 && < 5
+  - QuickCheck
   - aeson
+  - btrfs
   - containers
   - data-default
   - directory
   - filepath
   - http-media
   - lens
+  - mtl
+  - quickcheck-text
   - servant
   - servant-server
+  - temporary
   - text
 default-extensions:
   - DataKinds
   - FlexibleInstances
   - MultiParamTypeClasses
   - OverloadedStrings
+  - RecordWildCards
   - TemplateHaskell
   - TypeOperators
 
