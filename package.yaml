@@ -42,7 +42,9 @@ executables:
     dependencies:
       - base
       - docker-btrfs-volumes
-      - warp-tls
+      - network
+      - optparse-applicative
+      - warp
 
 tests:
   spec:
